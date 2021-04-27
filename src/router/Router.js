@@ -2,9 +2,11 @@ import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
-import getLoginStatus from '../helpers/api_methods';
+import axios from 'axios';
 import App from '../components/App';
 import Signup from '../components/registrations/Signup';
+import Login from '../components/registrations/Login';
+import Navigation from '../components/Navigation';
 
 const Router = () => {
   const [isLogged, setLoggedIn] = useState({
@@ -26,8 +28,8 @@ const Router = () => {
     });
   };
 
-  useEffect(() => {
-    getLoginStatus()
+  const getLoginStatus = () => {
+    axios.get('http://localhost:3001/logged_in', { withCredentials: true })
       .then(response => {
         if (response.data.logged_in) {
           handleLogin(response);
@@ -35,13 +37,18 @@ const Router = () => {
           handleLogout();
         }
       });
+  };
+
+  useEffect(() => {
+    getLoginStatus();
   }, [isLogged]);
 
   return (
     <BrowserRouter>
+      <Navigation />
       <Switch>
         <Route path="/" component={App} exact />
-        <Route path="/login" component={App} />
+        <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route path="*">
           <Redirect to="/" />

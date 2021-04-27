@@ -13,6 +13,7 @@ const Signup = () => {
     const { name, value } = event.target;
 
     setUserInfo({
+      ...userInfo,
       [name]: value,
     });
   };
@@ -30,7 +31,7 @@ const Signup = () => {
       <h1>Sign Up</h1>
 
       <form onSubmit={handleSubmit}>
-        <input placeholder="Username" type="text" name="username" value={username} onChange={handleChange} />
+        <input placeholder="Username" name="username" type="text" value={username} onChange={handleChange} />
         <input placeholder="Email;" type="email" name="email" value={email} onChange={handleChange} />
         <input placeholder="Password" type="password" name="password" value={password} onChange={handleChange} />
         <input placeholder="Password Confirmation" type="password" name="password_confirmation" value={confirmation} onChange={handleChange} />
