@@ -41,15 +41,15 @@ const Router = () => {
 
   useEffect(() => {
     getLoginStatus();
-  }, [isLogged]);
+  }, []);
 
   return (
     <BrowserRouter>
-      <Navigation />
+      <Navigation loggedInStatus={isLogged.isLoggedIn} handleLogout={handleLogout} />
       <Switch>
         <Route path="/" component={App} exact />
-        <Route path="/login" component={Login} />
-        <Route path="/signup" component={Signup} />
+        <Route path="/login" render={() => <Login handleLogin={handleLogin} loggedInStatus={isLogged.isLoggedIn} />} />
+        <Route path="/signup" render={() => <Signup handleLogin={handleLogin} loggedInStatus={isLogged.isLoggedIn} />} />
         <Route path="*">
           <Redirect to="/" />
         </Route>

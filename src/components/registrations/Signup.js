@@ -1,6 +1,9 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import { useHistory, Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-const Signup = () => {
+const Signup = ({ handleLogin }) => {
   const [userInfo, setUserInfo] = useState({
     username: '',
     email: '',
@@ -18,13 +21,38 @@ const Signup = () => {
     });
   };
 
-  const handleSubmit = event => {
-    event.preventDefault();
-  };
+  const history = useHistory();
 
   const {
     username, email, password, password_confirmation: confirmation,
   } = userInfo;
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    const user = {
+      username, email, password, password_confirmation: confirmation,
+    };
+
+    axios.post('http://localhost:3001/users', { user }, { withCredentials: true }).then(response => {
+      if (response.data.status === 'created') {
+        handleLogin(response.data);
+        history.push('/');
+      } else {
+        setUserInfo({
+          errors: response.data.errors,
+        });
+      }
+    });
+  };
+
+  const handleErrors = () => (
+    <div>
+      <ul>
+        {userInfo.errors.map(error => <li key={error}>{error}</li>)}
+      </ul>
+    </div>
+  );
 
   return (
     <>
@@ -37,8 +65,20 @@ const Signup = () => {
         <input placeholder="Password Confirmation" type="password" name="password_confirmation" value={confirmation} onChange={handleChange} />
         <button type="submit">Sign Up</button>
       </form>
+      <div>
+        <Link to="/login">Log In</Link>
+      </div>
+      <div>
+        {
+          userInfo.errors ? handleErrors() : null
+        }
+      </div>
     </>
   );
+};
+
+Signup.propTypes = {
+  handleLogin: PropTypes.func.isRequired,
 };
 
 export default Signup;
