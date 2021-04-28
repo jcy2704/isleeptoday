@@ -7,8 +7,8 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import App from '../components/App';
-import Signup from '../components/registrations/Signup';
-import Login from '../components/registrations/Login';
+import Signup from '../containers/registrations/Signup';
+import Login from '../containers/registrations/Login';
 import Navigation from '../components/Navigation';
 import { loginUser, logoutUser } from '../actions';
 
