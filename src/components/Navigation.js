@@ -33,9 +33,9 @@ const Navigation = ({ loggedInStatus, handleLogout, user }) => {
   };
 
   return (
-    <div>
+    <nav className="position-fixed">
       {isLoggedIn()}
-    </div>
+    </nav>
   );
 };
 

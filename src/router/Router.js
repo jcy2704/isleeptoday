@@ -6,7 +6,8 @@ import {
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import App from '../components/App';
+import Home from '../components/Home';
+import Listing from '../components/Listing';
 import Signup from '../containers/registrations/Signup';
 import Login from '../containers/registrations/Login';
 import Navigation from '../components/Navigation';
@@ -43,7 +44,7 @@ const Router = ({ session, login, logout }) => {
     <BrowserRouter>
       <Navigation user={session.user} loggedInStatus={session.isLoggedIn} handleLogout={handleLogout} />
       <Switch>
-        <Route path="/" component={App} exact />
+        <Route path="/" component={session.isLoggedIn ? Listing : Home} exact />
         <Route path="/login" render={() => <Login handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
         <Route path="/signup" render={() => <Signup handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
         <Route path="*">
