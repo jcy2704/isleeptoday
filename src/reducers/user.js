@@ -1,6 +1,11 @@
 import { LOGIN, LOGOUT, USER_ERRORS } from '../actions/index';
 
-const userReducer = (state = {}, action) => {
+const initalState = {
+  isLoggedIn: false,
+  user: {},
+};
+
+const userReducer = (state = initalState, action) => {
   switch (action.type) {
     case LOGIN:
       return { isLoggedIn: true, user: action.user };

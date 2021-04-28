@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userErrors } from '../../actions';
 
-const Signup = ({ handleLogin, session, addErrors }) => {
+const Login = ({ handleLogin, session, addErrors }) => {
   const [userInfo, setUserInfo] = useState({
     username: '',
     password: '',
@@ -72,7 +72,7 @@ const Signup = ({ handleLogin, session, addErrors }) => {
   );
 };
 
-Signup.propTypes = {
+Login.propTypes = {
   handleLogin: PropTypes.func.isRequired,
   session: PropTypes.oneOfType([PropTypes.object]).isRequired,
   addErrors: PropTypes.func.isRequired,
@@ -84,4 +84,4 @@ const mapDispatchToProps = dispatch => ({
   addErrors: errors => (dispatch(userErrors(errors))),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
