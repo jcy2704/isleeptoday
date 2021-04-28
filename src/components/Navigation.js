@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
-const Navigation = ({ loggedInStatus, handleLogout }) => {
+const Navigation = ({ loggedInStatus, handleLogout, user }) => {
   const history = useHistory();
 
   const handleClick = () => {
@@ -18,6 +18,7 @@ const Navigation = ({ loggedInStatus, handleLogout }) => {
     if (loggedInStatus) {
       return (
         <>
+          <p>{user.username}</p>
           <Link to="/logout" onClick={handleClick}>Logout</Link>
         </>
       );
@@ -41,6 +42,7 @@ const Navigation = ({ loggedInStatus, handleLogout }) => {
 Navigation.propTypes = {
   loggedInStatus: PropTypes.bool.isRequired,
   handleLogout: PropTypes.func.isRequired,
+  user: PropTypes.oneOfType([PropTypes.object]).isRequired,
 };
 
 export default Navigation;

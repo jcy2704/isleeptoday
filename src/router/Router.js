@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import {
   BrowserRouter, Switch, Route, Redirect,
@@ -26,7 +27,7 @@ const Router = ({ session, login, logout }) => {
       axios.get('http://localhost:3001/logged_in', { withCredentials: true, headers: { Authenticate: localStorage.token } })
         .then(response => {
           if (response.data.logged_in) {
-            handleLogin(response);
+            handleLogin(response.data);
           } else {
             handleLogout();
           }
@@ -40,7 +41,7 @@ const Router = ({ session, login, logout }) => {
 
   return (
     <BrowserRouter>
-      <Navigation loggedInStatus={session.isLoggedIn} handleLogout={handleLogout} />
+      <Navigation user={session.user} loggedInStatus={session.isLoggedIn} handleLogout={handleLogout} />
       <Switch>
         <Route path="/" component={App} exact />
         <Route path="/login" render={() => <Login handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
