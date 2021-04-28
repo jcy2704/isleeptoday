@@ -26,17 +26,20 @@ const Router = () => {
       isLoggedIn: false,
       user: {},
     });
+    localStorage.removeItem('token');
   };
 
   const getLoginStatus = () => {
-    axios.get('http://localhost:3001/logged_in', { withCredentials: true })
-      .then(response => {
-        if (response.data.logged_in) {
-          handleLogin(response);
-        } else {
-          handleLogout();
-        }
-      });
+    if (localStorage.getItem('token')) {
+      axios.get('http://localhost:3001/logged_in', { withCredentials: true, headers: { Authenticate: localStorage.token } })
+        .then(response => {
+          if (response.data.logged_in) {
+            handleLogin(response);
+          } else {
+            handleLogout();
+          }
+        });
+    }
   };
 
   useEffect(() => {

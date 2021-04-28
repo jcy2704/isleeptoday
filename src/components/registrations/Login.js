@@ -34,6 +34,7 @@ const Signup = ({ handleLogin }) => {
     axios.post('http://localhost:3001/login', { user }, { withCredentials: true }).then(response => {
       if (response.data.logged_in) {
         handleLogin(response.data);
+        localStorage.setItem('token', response.data.token);
         history.push('/');
       } else {
         setUserInfo({
