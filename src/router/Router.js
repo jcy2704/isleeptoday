@@ -1,31 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import {
   BrowserRouter, Switch, Route, Redirect,
 } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import App from '../components/App';
 import Signup from '../components/registrations/Signup';
 import Login from '../components/registrations/Login';
 import Navigation from '../components/Navigation';
+import { loginUser, logoutUser } from '../actions';
 
-const Router = () => {
-  const [isLogged, setLoggedIn] = useState({
-    isLoggedIn: false,
-    user: {},
-  });
-
+const Router = ({ session, login, logout }) => {
   const handleLogin = data => {
-    setLoggedIn({
-      isLoggedIn: true,
-      user: data.user,
-    });
+    login(data.user);
   };
 
   const handleLogout = () => {
-    setLoggedIn({
-      isLoggedIn: false,
-      user: {},
-    });
+    logout();
     localStorage.removeItem('token');
   };
 
@@ -48,11 +40,11 @@ const Router = () => {
 
   return (
     <BrowserRouter>
-      <Navigation loggedInStatus={isLogged.isLoggedIn} handleLogout={handleLogout} />
+      <Navigation loggedInStatus={session.isLoggedIn} handleLogout={handleLogout} />
       <Switch>
         <Route path="/" component={App} exact />
-        <Route path="/login" render={() => <Login handleLogin={handleLogin} loggedInStatus={isLogged.isLoggedIn} />} />
-        <Route path="/signup" render={() => <Signup handleLogin={handleLogin} loggedInStatus={isLogged.isLoggedIn} />} />
+        <Route path="/login" render={() => <Login handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
+        <Route path="/signup" render={() => <Signup handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
         <Route path="*">
           <Redirect to="/" />
         </Route>
@@ -61,4 +53,17 @@ const Router = () => {
   );
 };
 
-export default Router;
+Router.propTypes = {
+  session: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  login: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = state => ({ session: state.session });
+
+const mapDispatchToProps = dispatch => ({
+  login: user => (dispatch(loginUser(user))),
+  logout: () => (dispatch(logoutUser())),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Router);

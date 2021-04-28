@@ -2,12 +2,13 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { userErrors } from '../../actions';
 
-const Signup = ({ handleLogin }) => {
+const Signup = ({ handleLogin, session, addErrors }) => {
   const [userInfo, setUserInfo] = useState({
     username: '',
     password: '',
-    errors: '',
   });
 
   const history = useHistory();
@@ -37,9 +38,7 @@ const Signup = ({ handleLogin }) => {
         localStorage.setItem('token', response.data.token);
         history.push('/');
       } else {
-        setUserInfo({
-          errors: response.data.errors,
-        });
+        addErrors(response.data.errors);
       }
     });
   };
@@ -47,7 +46,7 @@ const Signup = ({ handleLogin }) => {
   const handleErrors = () => (
     <div>
       <ul>
-        {userInfo.errors.map(error => <li key={error}>{error}</li>)}
+        {session.errors.map(error => <li key={error}>{error}</li>)}
       </ul>
     </div>
   );
@@ -66,7 +65,7 @@ const Signup = ({ handleLogin }) => {
       </div>
       <div>
         {
-          userInfo.errors ? handleErrors() : null
+          session.errors ? handleErrors() : null
         }
       </div>
     </>
@@ -75,6 +74,14 @@ const Signup = ({ handleLogin }) => {
 
 Signup.propTypes = {
   handleLogin: PropTypes.func.isRequired,
+  session: PropTypes.oneOfType([PropTypes.object]).isRequired,
+  addErrors: PropTypes.func.isRequired,
 };
 
-export default Signup;
+const mapStateToProps = state => ({ session: state.session });
+
+const mapDispatchToProps = dispatch => ({
+  addErrors: errors => (dispatch(userErrors(errors))),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
