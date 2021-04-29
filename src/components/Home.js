@@ -38,17 +38,29 @@ const Home = () => {
         <div />
 
         <div className="ad-listing-info d-flex justify-content-center flex-column">
-          <div className="col-md w-100 d-flex justify-content-center">
+          <div className="image-placeholder col-md w-100 d-flex justify-content-center">
             <img src="https://via.placeholder.com/256" alt="" />
           </div>
           <div className="col-md">
-            <h2>Only best places for your rest</h2>
+            <h2 className="text-center">Only best places for your rest</h2>
             <p className="text-justify">
               More than ten thousand house at your disposal. Only the best and checked landlords. We will find the best place for you and the conditions for a safe transaction and comfortable stay.
             </p>
+            <div className="text-center">
+              <button type="button">Sign Up Now</button>
+            </div>
           </div>
         </div>
       </section>
+
+      <div className="mid-break">
+        <p>
+          PEOPLE ARE ALREADY ENJOYING THE SERVICE
+        </p>
+        <h4>
+          Look what these have to say
+        </h4>
+      </div>
     </>
   );
 };

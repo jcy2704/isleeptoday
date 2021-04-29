@@ -30,6 +30,7 @@ const Navigation = ({ loggedInStatus, handleLogout, user }) => {
     axios.delete('http://localhost:3001/logout', { withCredentials: true })
       .then(() => {
         handleLogout();
+        handleSidebar();
         history.push('/');
       });
   };

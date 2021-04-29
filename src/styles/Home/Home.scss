@@ -19,7 +19,7 @@
 
 .mid-break {
   text-align: center;
-  margin: 35px 0;
+  padding: 35px 10px;
 
   p {
     font-size: 0.8em;
@@ -28,11 +28,32 @@
   }
 
   h4 {
-    font-size: 1.2em;
+    font-size: 1.4em;
   }
+}
+
+.image-placeholder {
+  margin-bottom: 20px;
 }
 
 .listing {
   padding: 40px 5px;
   background-color: #e7f0ff;
+
+  h2 {
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+
+  button {
+    background-color: #ec5200;
+    padding: 7px 15px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
 }
