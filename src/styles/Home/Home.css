@@ -1,0 +1,40 @@
+.hero-img {
+  height: 100vh;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.hero-info {
+  bottom: 10%;
+  padding: 20px;
+  color: white;
+}
+
+.hero-info h1 {
+  font-size: 2em;
+}
+
+.hero-info p {
+  font-size: 0.9em;
+}
+
+.mid-break {
+  text-align: center;
+  margin: 35px 0;
+}
+
+.mid-break p {
+  font-size: 0.8em;
+  font-weight: bold;
+  color: gray;
+}
+
+.mid-break h4 {
+  font-size: 1.2em;
+}
+
+.listing {
+  padding: 40px 5px;
+  background-color: #e7f0ff;
+}
+/*# sourceMappingURL=Home.css.map */
