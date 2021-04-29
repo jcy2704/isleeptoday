@@ -1,0 +1,43 @@
+html {
+  font-size: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+h1 {
+  margin-bottom: 0;
+}
+
+.container {
+  padding: 0;
+}
+
+.col {
+  padding: 0;
+}

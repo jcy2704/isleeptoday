@@ -1,0 +1,47 @@
+@import '../globals';
+
+.hamburger {
+  padding: 10px 24px;
+  z-index: 1000;
+  background-color: transparent;
+  transition: 350ms;
+
+  button {
+    color: white;
+    transition: 350ms;
+  }
+}
+
+.white-bg {
+  background-color: white;
+  transition: 500ms;
+
+  button {
+    color: black;
+    transition: 500ms;
+  }
+}
+
+.open-close {
+  font-size: 1.4em;
+}
+
+.sidebar-cont {
+  background-color: white;
+  width: 100vw;
+  height: 100vh;
+  padding: 15px 24px;
+  top: 0;
+  left: -100%;
+  transition: 750ms;
+  z-index: 1000;
+}
+
+.active {
+  left: 0;
+  transition: 350ms;
+}
+
+.close-btn {
+  margin-bottom: 12px;
+}
