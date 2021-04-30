@@ -1,0 +1,47 @@
+.ls-background {
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 100vh;
+  opacity: 0.3;
+}
+
+.ls-form {
+  top: 0;
+  bottom: 0;
+}
+
+.login-cont {
+  height: 100vh;
+}
+
+.login-title {
+  font-weight: 300;
+  font-size: 1.7em;
+}
+
+.input {
+  border-radius: 20px;
+  border: 1px solid gray;
+  font-size: 0.8em;
+  background-color: transparent;
+  text-align: center;
+}
+
+.input:focus {
+  border: 1px solid #ec5200;
+}
+
+input[type="password"] {
+  color: #ec5200;
+}
+
+.login-btn {
+  border-radius: 20px;
+  background-color: #ec5200;
+  color: white;
+}
+
+.signup-btn {
+  font-size: 0.9em;
+}
+/*# sourceMappingURL=Login.css.map */

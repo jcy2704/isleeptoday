@@ -7,6 +7,7 @@ import Router from './router/Router';
 import reportWebVitals from './reportWebVitals';
 import reducers from './reducers';
 import 'bootstrap/dist/css/bootstrap.css';
+import './styles/index/index.css';
 
 const store = createStore(reducers, applyMiddleware(thunk));
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import * as FaIcons from 'react-icons/fa';
@@ -25,6 +25,7 @@ const Navigation = ({ loggedInStatus, handleLogout, user }) => {
   const handleSidebar = () => setSidebar(!sidebar);
 
   const history = useHistory();
+  const location = useLocation();
 
   const handleClick = () => {
     axios.delete('http://localhost:3001/logout', { withCredentials: true })
@@ -56,7 +57,7 @@ const Navigation = ({ loggedInStatus, handleLogout, user }) => {
   return (
     <nav>
       <div className="menu-info">
-        <div className={`hamburger w-100 d-flex justify-content-end position-fixed ${lower ? 'white-bg' : ''}`}>
+        <div className={`hamburger w-100 d-flex justify-content-end position-fixed ${lower ? 'white-bg' : ''} ${location.pathname === '/login' || location.pathname === '/signup' ? 'orange' : ''}`}>
           <button type="button" className="open-icon open-close" onClick={handleSidebar}>
             <FaIcons.FaBars />
           </button>

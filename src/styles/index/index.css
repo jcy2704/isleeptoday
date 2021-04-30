@@ -1,24 +1,26 @@
 html {
   font-size: 100%;
-  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 *,
 *::before,
 *::after {
-  box-sizing: inherit;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
   margin: 0;
   padding: 0;
 }
 
 a {
   text-decoration: none;
-  color: inherit;
+  color: black;
+}
 
-  &:hover {
-    text-decoration: none;
-    color: inherit;
-  }
+a:hover {
+  text-decoration: none;
+  color: inherit;
 }
 
 ul {
@@ -41,7 +43,4 @@ h1 {
 .col {
   padding: 0;
 }
-
-:focus-visible {
-  outline: 0;
-}
+/*# sourceMappingURL=index.css.map */

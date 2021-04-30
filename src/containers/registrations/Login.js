@@ -4,6 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userErrors } from '../../actions';
+import '../../styles/Login/Login.css';
 
 const Login = ({ handleLogin, session, addErrors }) => {
   const [userInfo, setUserInfo] = useState({
@@ -53,20 +54,27 @@ const Login = ({ handleLogin, session, addErrors }) => {
 
   return (
     <>
-      <h1>Login</h1>
+      <div className="login-cont position-relative">
+        <div>
+          <img className="w-100 ls-background" src="https://images.unsplash.com/photo-1501028932887-da5de53af865?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="background" />
+        </div>
+        <div className="ls-form position-absolute d-flex p-5 justify-content-center w-100 flex-column">
+          <h1 className="login-title text-center mb-4">Login</h1>
 
-      <form onSubmit={handleSubmit}>
-        <input id="loginInput" placeholder="Username" type="text" value={username} name="username" onChange={handleChange} />
-        <input placeholder="Password" type="password" name="password" value={password} onChange={handleChange} />
-        <button type="submit">Login</button>
-      </form>
-      <div>
-        <Link to="/signup">Sign Up</Link>
-      </div>
-      <div>
-        {
-          session.errors ? handleErrors() : null
-        }
+          <form className="d-flex flex-column align-items-center" onSubmit={handleSubmit}>
+            <input id="loginInput" className="input w-100 mb-3 px-4 py-2" placeholder="Username" type="text" value={username} name="username" onChange={handleChange} />
+            <input placeholder="Password" className="input w-100 mb-4 px-4 py-2" type="password" name="password" value={password} onChange={handleChange} />
+            <button className="login-btn px-3 py-1 w-50 mb-2" type="submit">Login</button>
+            <div className="signup-btn">
+              <Link to="/signup">Sign Up</Link>
+            </div>
+          </form>
+          <div>
+            {
+              session.errors ? handleErrors() : null
+            }
+          </div>
+        </div>
       </div>
     </>
   );

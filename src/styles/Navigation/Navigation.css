@@ -44,6 +44,10 @@ h1 {
   padding: 0;
 }
 
+:focus-visible {
+  outline: 0;
+}
+
 .hamburger {
   padding: 10px 24px;
   z-index: 1000;
@@ -65,9 +69,13 @@ h1 {
 }
 
 .white-bg button {
-  color: black;
+  color: #ec5200;
   -webkit-transition: 500ms;
   transition: 500ms;
+}
+
+.orange button {
+  color: #ec5200;
 }
 
 .open-close {
