@@ -5,7 +5,6 @@ import axios from 'axios';
 import * as FaIcons from 'react-icons/fa';
 import * as GrIcons from 'react-icons/gr';
 import '../styles/Navigation/Navigation.css';
-import NavData from '../helpers/NavData';
 
 const Navigation = ({ loggedInStatus, handleLogout, user }) => {
   const [sidebar, setSidebar] = useState(false);
@@ -70,13 +69,17 @@ const Navigation = ({ loggedInStatus, handleLogout, user }) => {
                 <GrIcons.GrClose />
               </button>
             </li>
-            {NavData.map(data => (
-              <li key={data.title} className={data.cName}>
-                <Link to={data.path} onClick={handleSidebar}>
-                  {data.title}
-                </Link>
+            <li>
+              <Link to="/" onClick={handleSidebar}>{loggedInStatus ? 'Listings' : 'Home'}</Link>
+            </li>
+            {loggedInStatus ? '' : (
+              <li>
+                <Link to="/login" onClick={handleSidebar}>Listings</Link>
               </li>
-            ))}
+            )}
+            <li>
+              <Link to={loggedInStatus ? '/bookmarks' : '/login'} onClick={handleSidebar}>Bookmarks</Link>
+            </li>
           </ul>
           <div className="d-flex flex-column">
             {isLoggedIn()}
