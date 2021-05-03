@@ -2,10 +2,9 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { useHistory } from 'react-router';
 import { getListings } from '../actions';
 
-const Listing = ({ addListings, listings, loggedInStatus }) => {
+const Listing = ({ addListings, listings }) => {
   const getAllListings = () => {
     axios.get('http://localhost:3001/api/v1/listings')
       .then(response => {
@@ -13,19 +12,13 @@ const Listing = ({ addListings, listings, loggedInStatus }) => {
       });
   };
 
-  const history = useHistory();
-
-  if (!loggedInStatus) {
-    history.push('/login');
-  }
-
   useEffect(() => {
     getAllListings();
   }, []);
 
   return (
     <>
-      <div className="App">Listing</div>
+      <h1 className="listing-title">Listings</h1>
       {listings.map(listing => <div key={listing.id}>{listing.name}</div>)}
     </>
   );
@@ -34,7 +27,6 @@ const Listing = ({ addListings, listings, loggedInStatus }) => {
 Listing.propTypes = {
   addListings: PropTypes.func.isRequired,
   listings: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
-  loggedInStatus: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({ listings: state.listings });

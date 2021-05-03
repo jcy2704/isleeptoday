@@ -44,7 +44,9 @@ const Router = ({ session, login, logout }) => {
     <BrowserRouter>
       {session.isLoggedIn ? <Navigation user={session.user} loggedInStatus={session.isLoggedIn} handleLogout={handleLogout} /> : ''}
       <Switch>
-        <Route path="/" render={() => <Listing loggedInStatus={session.isLoggedIn} />} exact />
+        <Route path="/" exact>
+          {session.isLoggedIn ? <Listing /> : <Redirect to="/login" />}
+        </Route>
         <Route path="/login" render={() => <Login handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
         <Route path="/signup" render={() => <Signup handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
         <Route path="*">

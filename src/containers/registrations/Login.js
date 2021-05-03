@@ -14,6 +14,10 @@ const Login = ({ handleLogin, session, addErrors }) => {
 
   const history = useHistory();
 
+  if (session.isLoggedIn) {
+    history.push('/');
+  }
+
   const {
     username, password,
   } = userInfo;
