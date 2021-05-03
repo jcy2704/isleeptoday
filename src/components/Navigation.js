@@ -70,15 +70,10 @@ const Navigation = ({ loggedInStatus, handleLogout, user }) => {
               </button>
             </li>
             <li>
-              <Link to="/" onClick={handleSidebar}>{loggedInStatus ? 'Listings' : 'Home'}</Link>
+              <Link to="/" onClick={handleSidebar}>Listings</Link>
             </li>
-            {loggedInStatus ? '' : (
-              <li>
-                <Link to="/login" onClick={handleSidebar}>Listings</Link>
-              </li>
-            )}
             <li>
-              <Link to={loggedInStatus ? '/bookmarks' : '/login'} onClick={handleSidebar}>Bookmarks</Link>
+              <Link to="/bookmarks" onClick={handleSidebar}>Bookmarks</Link>
             </li>
           </ul>
           <div className="d-flex flex-column">

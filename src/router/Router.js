@@ -6,8 +6,8 @@ import {
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Home from '../components/Home';
-import Listing from '../components/Listing';
+// import Home from '../components/Home';
+import Listing from '../containers/Listing';
 import Signup from '../containers/registrations/Signup';
 import Login from '../containers/registrations/Login';
 import Navigation from '../components/Navigation';
@@ -19,8 +19,8 @@ const Router = ({ session, login, logout }) => {
   };
 
   const handleLogout = () => {
-    logout();
     localStorage.removeItem('token');
+    logout();
   };
 
   const getLoginStatus = () => {
@@ -42,9 +42,9 @@ const Router = ({ session, login, logout }) => {
 
   return (
     <BrowserRouter>
-      <Navigation user={session.user} loggedInStatus={session.isLoggedIn} handleLogout={handleLogout} />
+      {session.isLoggedIn ? <Navigation user={session.user} loggedInStatus={session.isLoggedIn} handleLogout={handleLogout} /> : ''}
       <Switch>
-        <Route path="/" component={session.isLoggedIn ? Listing : Home} exact />
+        <Route path="/" render={() => <Listing loggedInStatus={session.isLoggedIn} />} exact />
         <Route path="/login" render={() => <Login handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
         <Route path="/signup" render={() => <Signup handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
         <Route path="*">
