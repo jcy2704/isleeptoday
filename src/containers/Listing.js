@@ -1,8 +1,11 @@
+/* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { getListings } from '../actions';
+import ListingCont from '../components/ListingCont';
+import '../styles/Listings/listings.css';
 
 const Listing = ({ addListings, listings }) => {
   const getAllListings = () => {
@@ -18,8 +21,11 @@ const Listing = ({ addListings, listings }) => {
 
   return (
     <>
-      <h1 className="listing-title">Listings</h1>
-      {listings.map(listing => <div key={listing.id}>{listing.name}</div>)}
+      <section className="listing-sect d-flex justify-content-center">
+        <div className="w-75">
+          {listings.map(listing => <ListingCont key={listing.id} name={listing.name} description={listing.description} />)}
+        </div>
+      </section>
     </>
   );
 };

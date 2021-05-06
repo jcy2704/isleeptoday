@@ -36,6 +36,11 @@ h1 {
   margin-bottom: 0;
 }
 
+img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .container {
   padding: 0;
 }
@@ -57,7 +62,7 @@ h1 {
 }
 
 .hamburger button {
-  color: white;
+  color: #ec5200;
   -webkit-transition: 350ms;
   transition: 350ms;
 }
