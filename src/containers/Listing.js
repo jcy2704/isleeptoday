@@ -1,44 +1,58 @@
-/* eslint-disable max-len */
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
 import axios from 'axios';
-import { getListings } from '../actions';
-import ListingCont from '../components/ListingCont';
+import SwiperCore, {
+  Navigation, EffectCoverflow, A11y,
+} from 'swiper';
+import PropTypes from 'prop-types';
+import { Swiper } from 'swiper/react';
+import ListingCard from '../components/ListingCard';
+import 'swiper/swiper.scss';
+import 'swiper/components/navigation/navigation.scss';
+import 'swiper/components/effect-coverflow/effect-coverflow.scss';
 import '../styles/Listings/listings.css';
+import { getListings } from '../actions';
 
-const Listing = ({ addListings, listings }) => {
-  const getAllListings = () => {
+SwiperCore.use([Navigation, EffectCoverflow, A11y]);
+
+const Listings = ({ listings, getAllListings }) => {
+  useEffect(() => {
     axios.get('http://localhost:3001/api/v1/listings')
       .then(response => {
-        addListings(response.data);
+        getAllListings(response.data);
       });
-  };
-
-  useEffect(() => {
-    getAllListings();
   }, []);
 
   return (
-    <>
-      <section className="listing-sect d-flex justify-content-center">
-        <div className="w-75">
-          {listings.map(listing => <ListingCont key={listing.id} name={listing.name} description={listing.description} />)}
-        </div>
-      </section>
-    </>
+    <Swiper
+      className="w-100"
+      navigation
+      tag="section"
+      wrapperTag="ul"
+      effect="coverflow"
+      coverflowEffect={{
+        rotate: 10,
+        slideShadows: false,
+        stretch: 0,
+        depth: 150,
+        modifier: 4,
+      }}
+      centeredSlides
+    >
+      {listings.map(listing => <ListingCard key={listing.id} name={listing.name} />)}
+    </Swiper>
   );
 };
 
-Listing.propTypes = {
-  addListings: PropTypes.func.isRequired,
-  listings: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
+Listings.propTypes = {
+  listings: PropTypes.oneOfType([PropTypes.array, PropTypes.object]).isRequired,
+  getAllListings: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({ listings: state.listings });
 
 const mapDispatchToProps = dispatch => ({
-  addListings: listings => dispatch(getListings(listings)),
+  getAllListings: listings => dispatch(getListings(listings)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Listing);
+export default connect(mapStateToProps, mapDispatchToProps)(Listings);

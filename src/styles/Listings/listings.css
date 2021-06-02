@@ -2,4 +2,21 @@
   bottom: 0;
   background-color: white;
 }
+
+.swiper-container {
+  height: 100vh;
+}
+
+.swiper-wrapper {
+  width: 75%;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #969696;
+}
+
+.h-100vh {
+  height: 100vh;
+}
 /*# sourceMappingURL=listings.css.map */
