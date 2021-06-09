@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import * as FaIcons from 'react-icons/fa';
 import * as GrIcons from 'react-icons/gr';
 import '../styles/Navigation/Navigation.css';
@@ -26,12 +25,9 @@ const Navigation = ({ loggedInStatus, handleLogout, user }) => {
   const history = useHistory();
 
   const handleClick = () => {
-    axios.delete('http://localhost:3001/logout', { withCredentials: true })
-      .then(() => {
-        handleLogout();
-        handleSidebar();
-        history.push('/');
-      });
+    handleLogout();
+    handleSidebar();
+    history.push('/');
   };
 
   const isLoggedIn = () => {

@@ -6,7 +6,6 @@ import {
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-// import Home from '../components/Home';
 import Listing from '../containers/Listing';
 import Signup from '../containers/registrations/Signup';
 import Login from '../containers/registrations/Login';
@@ -19,8 +18,11 @@ const Router = ({ session, login, logout }) => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    logout();
+    axios.delete('http://localhost:3001/logout', { withCredentials: true })
+      .then(() => {
+        localStorage.removeItem('token');
+        logout();
+      });
   };
 
   const getLoginStatus = () => {
