@@ -49,7 +49,9 @@ const Router = ({ session, login, logout }) => {
         <Route path="/" exact>
           {session.isLoggedIn ? <Listing /> : <Redirect to="/login" />}
         </Route>
-        <Route path="/login" render={() => <Login handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
+        <Route path="/login">
+          {session.isLoggedIn ? <Redirect to="/" /> : <Login handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />}
+        </Route>
         <Route path="/signup" render={() => <Signup handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
         <Route path="*">
           <Redirect to="/" />
