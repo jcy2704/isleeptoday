@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { userErrors } from '../../actions';
 import '../../styles/Login/Login.css';
+import ErrorsComponent from '../../components/ErrorsComponent';
 
 const Signup = ({ handleLogin, session, addErrors }) => {
   const [userInfo, setUserInfo] = useState({
@@ -46,14 +47,6 @@ const Signup = ({ handleLogin, session, addErrors }) => {
     });
   };
 
-  const handleErrors = () => (
-    <div>
-      <ul>
-        {session.errors.map(error => <li key={error}>{error}</li>)}
-      </ul>
-    </div>
-  );
-
   return (
     <>
       <div className="login-cont position-relative">
@@ -76,7 +69,7 @@ const Signup = ({ handleLogin, session, addErrors }) => {
         </div>
         <div>
           {
-            session.errors ? handleErrors() : null
+            session.errors ? <ErrorsComponent errors={session.errors} /> : null
           }
         </div>
       </div>

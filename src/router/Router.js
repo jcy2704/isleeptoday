@@ -11,6 +11,7 @@ import Signup from '../containers/registrations/Signup';
 import Login from '../containers/registrations/Login';
 import Navigation from '../components/Navigation';
 import { loginUser, logoutUser } from '../actions';
+import Form from '../components/ListingForm';
 
 const Router = ({ session, login, logout }) => {
   const handleLogin = data => {
@@ -53,6 +54,7 @@ const Router = ({ session, login, logout }) => {
           {session.isLoggedIn ? <Redirect to="/" /> : <Login handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />}
         </Route>
         <Route path="/signup" render={() => <Signup handleLogin={handleLogin} loggedInStatus={session.isLoggedIn} />} />
+        <Route path="/form" render={() => <Form />} />
         <Route path="*">
           <Redirect to="/" />
         </Route>

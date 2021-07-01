@@ -5,7 +5,7 @@ import SwiperCore, {
   Navigation, EffectCoverflow, A11y,
 } from 'swiper';
 import PropTypes from 'prop-types';
-import { Swiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import ListingCard from '../components/ListingCard';
 import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
@@ -26,7 +26,6 @@ const Listings = ({ listings, getAllListings }) => {
   return (
     <Swiper
       className="w-100"
-      navigation
       tag="section"
       wrapperTag="ul"
       effect="coverflow"
@@ -39,7 +38,9 @@ const Listings = ({ listings, getAllListings }) => {
       }}
       centeredSlides
     >
-      {listings.map(listing => <ListingCard key={listing.id} name={listing.name} />)}
+      <SwiperSlide>
+        {listings.map(listing => <ListingCard key={listing.id} name={listing.name} />)}
+      </SwiperSlide>
     </Swiper>
   );
 };
